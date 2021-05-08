@@ -103,9 +103,8 @@ namespace Project.Services.Services
             AppUser loggedUser = await this._userManager.GetUserAsync(this._signInManager.Context.User);
             AppUser userToBeDeleted = await this.QueryFullUserAsync(userId);
 
-            string userRole = this._signInManager.Context
-                .User.FindFirstValue(ClaimTypes.Role);
-            bool isAdmin = userRole == AppRole.Admin; //Check here if issuer is an admin
+            IList<string> userRoles = await this._userManager.GetRolesAsync(loggedUser);
+            bool isAdmin = userRoles.Any(x => x == AppRole.Admin); //Check here if issuer is an admin
 
             //Only authorize for deletion the current logged user and the admin
             if (!loggedUser.Equals(userToBeDeleted) || !isAdmin)
