@@ -1,0 +1,27 @@
+@model UserWebModel
+
+@{
+    ViewBag.Title = $"{Model.Username}'s profile";
+}
+
+<div><h1>Hello @Model.Username</h1></div>
+<br/>
+
+<div>
+    <h5>Your Username: @Model.Username</h5>
+    <h5>Your First Name: @Model.FirstName</h5>
+    <h5>Your Sir Name: @Model.LastName</h5>
+    <h5>Your roles:</h5>
+    @foreach(string role in @Model.Roles)
+    {
+        <h5>    - @role</h5>
+    }
+
+    <a class="btn btn-outline-primary" asp-action="EditProfile" asp-route-userId="@Model.Id">Edit Profile</a>
+    <a class="btn btn-outline-primary alert-danger" asp-action="DeleteProfile" asp-route-userId="@Model.Id">Delete Profile</a>
+    <br/>
+    <br/>
+    <a class="btn btn-outline-primary" asp-action="LogOut">Log out</a>
+
+    <a class="btn btn-outline-primary alert-danger" asp-action="PromotionToAdmin" asp-route-userId="@Model.Id">Admin Promotion</a>
+</div>

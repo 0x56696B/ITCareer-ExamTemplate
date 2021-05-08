@@ -1,0 +1,20 @@
+@model UserWebModel
+
+<div><h1>Hello @Model.Username</h1></div>
+<br/>
+
+<div>
+    <h2>Here you can edit your profile:</h2>
+</div>
+<br/>
+
+<div>
+    <form method="post" asp-action="EditProfilePost">
+        <input asp-for="Id" value="@Model.Id" type="hidden">
+        <h5>Your username: <input asp-for="Username" value="@Model.Username"/></h5>
+        <h5>Your first name: <input asp-for="FirstName" value="@Model.FirstName"/></h5>
+        <h5>Your sir name: <input asp-for="LastName" value="@Model.LastName"/></h5>
+
+        <input class="btn btn-outline-primary" type="submit" value="Save"/>
+    </form>
+</div>
