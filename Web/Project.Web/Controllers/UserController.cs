@@ -25,12 +25,10 @@ namespace Project.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route(nameof(Register))]
         public IActionResult Register() => View();
 
         [HttpPost]
         [AllowAnonymous]
-        [Route(nameof(Register))]
         public async Task<IActionResult> RegisterPost([FromForm] RegisterWebModel registerWebModel)
         {
             RegisterServiceModel registerServiceModel = this._mapper.Map<RegisterServiceModel>(registerWebModel);
@@ -42,12 +40,10 @@ namespace Project.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route(nameof(Login))]
         public IActionResult Login() => View();
 
         [HttpPost]
         [AllowAnonymous]
-        [Route(nameof(Login))]
         public async Task<IActionResult> LoginPost([FromForm] LoginWebModel loginWebModel)
         {
             LoginServiceModel loginServiceModel = this._mapper.Map<LoginServiceModel>(loginWebModel);
@@ -61,7 +57,6 @@ namespace Project.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route(nameof(ViewProfile))]
         public async Task<IActionResult> ViewProfile()
         {
             UserServiceModel userServiceModel = await this._userService.GetLoggedInUserAsync();
@@ -74,7 +69,6 @@ namespace Project.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route(nameof(EditProfile))]
         public async Task<IActionResult> EditProfile(Guid userId)
         {
             UserServiceModel userServiceModel = await this._userService.GetByIdAsync(userId);
@@ -87,7 +81,6 @@ namespace Project.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route(nameof(EditProfile))]
         public async Task<IActionResult> EditProfilePost(UserWebModel userWebModel)
         {
             UserServiceModel userServiceModel = this._mapper.Map<UserServiceModel>(userWebModel);
@@ -99,7 +92,6 @@ namespace Project.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route(nameof(LogOut))]
         public async Task<IActionResult> LogOut()
         {
             await this._userService.SignOutAsync();
@@ -109,7 +101,6 @@ namespace Project.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route(nameof(DeleteProfile))]
         public async Task<IActionResult> DeleteProfile(Guid userId)
         {
             await this._userService.SignOutAsync();
@@ -120,7 +111,6 @@ namespace Project.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route(nameof(PromotionToAdmin))]
         public async Task<IActionResult> PromotionToAdmin(Guid userId)
         {
             await this._userService.PromoteToAdminAsync(userId);
